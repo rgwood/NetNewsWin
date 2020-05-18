@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="NetNewsWin.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NetNewsWin"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <controls:MasterDetailsView x:Name="MDV">
+            <controls:MasterDetailsView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,8">
+                        <TextBlock Text="{Binding FeedId}" />
+                        <TextBlock Text="{Binding Title}" 
+                                   MaxLines="1"/>
+                        <TextBlock Text="{Binding Content}" 
+                                   Opacity=".6" 
+                                   MaxLines="1"/>
+                    </StackPanel>
+                </DataTemplate>
+            </controls:MasterDetailsView.ItemTemplate>
+            <controls:MasterDetailsView.DetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Title}" 
+                                   Style="{ThemeResource SubtitleTextBlockStyle}" 
+                                   Margin="12,-6,0,0"/>
+                        <TextBlock x:Name="SubjectLine"
+                                   Text="{Binding Author}" 
+                                   Style="{ThemeResource BodyTextBlockStyle}" 
+                                   Margin="0,12,0,0"/>
+                        <TextBlock x:Name="Body" 
+                                   Text="{Binding Content}" 
+                                   Style="{ThemeResource BodyTextBlockStyle}" 
+                                   TextWrapping="Wrap" 
+                                   Margin="0,12,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </controls:MasterDetailsView.DetailsTemplate>
+        </controls:MasterDetailsView>
+    </Grid>
+</Page>
