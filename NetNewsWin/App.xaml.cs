@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace NetNewsWin
@@ -71,6 +62,36 @@ namespace NetNewsWin
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            SetTitleBarColours();
+        }
+
+        // I wish I didn't have to do this in code, but the main way of setting title bar colours
+        // in XAML (the community toolkit TitleBarExtensions) does not support ThemeResource
+        // https://stackoverflow.com/a/48220285/854694
+        // TODO: handle dark/light modes gracefully, and listen for theme changes
+        // https://blog.mzikmund.com/2017/01/observing-system-color-changes-in-uwp-apps/
+        private static void SetTitleBarColours()
+        {
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            var uiSettings = new UISettings(); // Weird that GetColorValue isn't static
+
+            // Set active window colors
+            // TODO: white text might not work with all accent colours - figure out a better way to determine foreground colour
+            titleBar.ForegroundColor = Windows.UI.Colors.White;
+            titleBar.BackgroundColor = uiSettings.GetColorValue(UIColorType.Accent);
+            titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonBackgroundColor = uiSettings.GetColorValue(UIColorType.Accent);
+            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonHoverBackgroundColor = uiSettings.GetColorValue(UIColorType.AccentDark1);
+            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.Gray;
+            titleBar.ButtonPressedBackgroundColor = uiSettings.GetColorValue(UIColorType.AccentDark2);
+
+            // Set inactive window colors
+            titleBar.InactiveForegroundColor = Windows.UI.Colors.White;
+            titleBar.InactiveBackgroundColor = uiSettings.GetColorValue(UIColorType.Accent);
+            titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.LightGray;
+            titleBar.ButtonInactiveBackgroundColor = uiSettings.GetColorValue(UIColorType.Accent);
         }
 
         /// <summary>
