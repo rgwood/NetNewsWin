@@ -10,37 +10,68 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <controls:MasterDetailsView x:Name="MDV">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <CommandBar OverflowButtonVisibility="Collapsed" >
+            <AppBarButton Icon="Add" Label="Add Feed" ToolTipService.ToolTip="Add Feed" Click="AppBarButton_Click" />
+            <AppBarButton Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh" Click="AppBarButton_Click"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Back" Label="Back" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Stop" Label="Stop" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Save" Label="Play" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Forward" Label="Forward" Click="AppBarButton_Click"/>
+        </CommandBar>
+
+        <controls:MasterDetailsView x:Name="FeedsMDV" Grid.Row="1">
             <controls:MasterDetailsView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,8">
-                        <TextBlock Text="{Binding FeedId}" />
-                        <TextBlock Text="{Binding Title}" 
-                                   MaxLines="1"/>
-                        <TextBlock Text="{Binding Content}" 
-                                   Opacity=".6" 
+                        <TextBlock Text="{Binding Name}" 
+                                   Foreground="{ThemeResource SystemAccentColor}"
                                    MaxLines="1"/>
                     </StackPanel>
                 </DataTemplate>
             </controls:MasterDetailsView.ItemTemplate>
             <controls:MasterDetailsView.DetailsTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Title}" 
-                                   Style="{ThemeResource SubtitleTextBlockStyle}" 
-                                   Margin="12,-6,0,0"/>
-                        <TextBlock x:Name="SubjectLine"
+                    <controls:MasterDetailsView ItemsSource="{Binding Entries}">
+                        <controls:MasterDetailsView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,8">
+                                    <TextBlock Text="{Binding FeedId}" />
+                                    <TextBlock Text="{Binding Title}" 
+                                   MaxLines="1"/>
+                                    <TextBlock Text="{Binding Content}" 
+                                   Opacity=".6" 
+                                   MaxLines="1"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </controls:MasterDetailsView.ItemTemplate>
+                        <controls:MasterDetailsView.DetailsTemplate>
+                            <DataTemplate>
+                                <StackPanel Padding="10">
+                                    <TextBlock Text="{Binding Title}" 
+                                   Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                    <TextBlock x:Name="SubjectLine"
                                    Text="{Binding Author}" 
                                    Style="{ThemeResource BodyTextBlockStyle}" 
                                    Margin="0,12,0,0"/>
-                        <TextBlock x:Name="Body" 
+                                    <TextBlock x:Name="Body" 
                                    Text="{Binding Content}" 
                                    Style="{ThemeResource BodyTextBlockStyle}" 
                                    TextWrapping="Wrap" 
                                    Margin="0,12,0,0"/>
-                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </controls:MasterDetailsView.DetailsTemplate>
+                    </controls:MasterDetailsView>
+
+
                 </DataTemplate>
             </controls:MasterDetailsView.DetailsTemplate>
         </controls:MasterDetailsView>
     </Grid>
+
 </Page>

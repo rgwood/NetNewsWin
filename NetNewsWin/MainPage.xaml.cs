@@ -27,12 +27,16 @@ namespace NetNewsWin
         public MainPage()
         {
             this.InitializeComponent();
-            Entries = Repository.GetTestEntries();
-            MDV.ItemsSource = Entries;
+            Feeds = Repository.GetTestFeeds();
+            FeedsMDV.ItemsSource = Feeds;
         }
 
-        public ObservableCollection<Entry> Entries { get; set; }
+        public ObservableCollection<Feed> Feeds { get; set; }
 
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 
