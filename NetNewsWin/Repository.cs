@@ -9,12 +9,22 @@ namespace NetNewsWin
 {
     public class Repository
     {
-        public static ObservableCollection<Entry> GetTestEntries()
+        public static ObservableCollection<Entry> GetTestEntries(string author = "Mike Mitchum")
         {
             return new ObservableCollection<Entry>
             {
-                new Entry(1, "Foo", "Jason Kottke", LoremIpsum),
-                new Entry(2, "Bar", "Mike Mitchum", LoremIpsum)
+                new Entry("Foo", author, LoremIpsum),
+                new Entry("Bar", author, LoremIpsum)
+            };
+        }
+
+        public static ObservableCollection<Feed> GetTestFeeds()
+        {
+            return new ObservableCollection<Feed>
+            {
+                new Feed("Spike Japan", GetTestEntries("Spike")),
+                new Feed("Waxy.org", GetTestEntries("Andy Baio")),
+                new Feed("Idle Words", GetTestEntries("Maciej Ceglowski"))
             };
         }
 
