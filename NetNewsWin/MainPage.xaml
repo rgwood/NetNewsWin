@@ -8,6 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local:UnreadToOpacityDoubleConverter x:Key="UnreadOpacityConverter"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -39,14 +42,17 @@
                     <controls:MasterDetailsView ItemsSource="{Binding Entries}">
                         <controls:MasterDetailsView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,8">
-                                    <TextBlock Text="{Binding FeedId}" />
-                                    <TextBlock Text="{Binding Title}" 
-                                   MaxLines="1"/>
-                                    <TextBlock Text="{Binding Content}" 
-                                   Opacity=".6" 
-                                   MaxLines="1"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Margin="0,0,10,0" Fill="{ThemeResource SystemAccentColorLight3}"
+                                             Opacity="{Binding Path=IsRead, Mode=OneWay, Converter={StaticResource UnreadOpacityConverter}}"/>
+                                    <StackPanel Margin="0,8">
+                                        <TextBlock Text="{Binding FeedId}" />
+                                        <TextBlock Text="{Binding Title}" MaxLines="1"/>
+                                        <TextBlock Text="{Binding Content}" 
+                                            Opacity=".6" MaxLines="1"/>
+                                    </StackPanel>
                                 </StackPanel>
+                                
                             </DataTemplate>
                         </controls:MasterDetailsView.ItemTemplate>
                         <controls:MasterDetailsView.DetailsTemplate>

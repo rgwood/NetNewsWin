@@ -19,6 +19,6 @@ namespace NetNewsWin
         public string Author { get; private set; }
         public string Content { get; private set; }
 
-        public bool IsRead { get; set; } = false;
+        public bool Unread { get; set; } = true;
     }
 }
