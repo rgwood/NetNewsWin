@@ -39,12 +39,12 @@
             </controls:MasterDetailsView.ItemTemplate>
             <controls:MasterDetailsView.DetailsTemplate>
                 <DataTemplate>
-                    <controls:MasterDetailsView ItemsSource="{Binding Entries}">
+                    <controls:MasterDetailsView ItemsSource="{Binding Entries}" SelectionChanged="EntriesView_SelectionChanged">
                         <controls:MasterDetailsView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse Width="10" Height="10" Margin="0,0,10,0" Fill="{ThemeResource SystemAccentColorLight3}"
-                                             Opacity="{Binding Path=IsRead, Mode=OneWay, Converter={StaticResource UnreadOpacityConverter}}"/>
+                                             Opacity="{Binding Path=Unread, Mode=OneWay, Converter={StaticResource UnreadOpacityConverter}}"/>
                                     <StackPanel Margin="0,8">
                                         <TextBlock Text="{Binding FeedId}" />
                                         <TextBlock Text="{Binding Title}" MaxLines="1"/>

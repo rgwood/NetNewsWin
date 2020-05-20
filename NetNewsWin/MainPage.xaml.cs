@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.UI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -36,6 +38,16 @@ namespace NetNewsWin
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void EntriesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //todo: error handling for deselection and possibly multiple items
+            Entry selected = (Entry) (sender as MasterDetailsView).SelectedItem;
+            if(selected != null)
+            {
+                selected.Unread = false;
+            }
         }
     }
 
