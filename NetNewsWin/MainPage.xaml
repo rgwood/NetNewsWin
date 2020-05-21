@@ -31,6 +31,7 @@
                                     MasterPaneWidth="250">
             <controls:MasterDetailsView.Resources>
                 <Style TargetType="ListViewItem">
+                    <!--https://github.com/windows-toolkit/WindowsCommunityToolkit/issues/938#issuecomment-279919421-->
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </controls:MasterDetailsView.Resources>
