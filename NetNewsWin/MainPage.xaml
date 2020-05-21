@@ -34,6 +34,7 @@
                         <TextBlock Text="{x:Bind Name}" 
                                    Foreground="{ThemeResource SystemAccentColor}"
                                    MaxLines="1"/>
+                        <TextBlock Text="{x:Bind UnreadCount, Mode=OneWay}"/>
                     </StackPanel>
                 </DataTemplate>
             </controls:MasterDetailsView.ItemTemplate>
