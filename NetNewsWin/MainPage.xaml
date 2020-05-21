@@ -27,27 +27,27 @@
             <AppBarButton Icon="Forward" Label="Forward" Click="AppBarButton_Click"/>
         </CommandBar>
 
-        <controls:MasterDetailsView x:Name="FeedsMDV" Grid.Row="1" BorderBrush="LightGray">
+        <controls:MasterDetailsView x:Name="FeedsMDV" Grid.Row="1" BorderBrush="LightGray" ItemsSource="{x:Bind Feeds}">
             <controls:MasterDetailsView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="local:Feed">
                     <StackPanel Margin="0,8">
-                        <TextBlock Text="{Binding Name}" 
+                        <TextBlock Text="{x:Bind Name}" 
                                    Foreground="{ThemeResource SystemAccentColor}"
                                    MaxLines="1"/>
                     </StackPanel>
                 </DataTemplate>
             </controls:MasterDetailsView.ItemTemplate>
             <controls:MasterDetailsView.DetailsTemplate>
-                <DataTemplate>
-                    <controls:MasterDetailsView ItemsSource="{Binding Entries}" SelectionChanged="EntriesView_SelectionChanged"  BorderBrush="LightGray">
+                <DataTemplate x:DataType="local:Feed">
+                    <controls:MasterDetailsView ItemsSource="{x:Bind Entries}" SelectionChanged="EntriesView_SelectionChanged"  BorderBrush="LightGray">
                         <controls:MasterDetailsView.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="local:Entry">
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse Width="10" Height="10" Margin="0,0,10,0" Fill="{ThemeResource SystemAccentColor}"
-                                             Opacity="{Binding Path=Unread, Mode=OneWay, Converter={StaticResource UnreadOpacityConverter}}"/>
+                                             Opacity="{x:Bind Path=Unread, Mode=OneWay, Converter={StaticResource UnreadOpacityConverter}}"/>
                                     <StackPanel Margin="0,8">
-                                        <TextBlock Text="{Binding Title}" MaxLines="1"/>
-                                        <TextBlock Text="{Binding Content}" 
+                                        <TextBlock Text="{x:Bind Title}" MaxLines="1"/>
+                                        <TextBlock Text="{x:Bind Content}" 
                                             Opacity=".6" MaxLines="1"/>
                                     </StackPanel>
                                 </StackPanel>
@@ -55,16 +55,16 @@
                             </DataTemplate>
                         </controls:MasterDetailsView.ItemTemplate>
                         <controls:MasterDetailsView.DetailsTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="local:Entry">
                                 <StackPanel Padding="10">
-                                    <TextBlock Text="{Binding Title}" 
+                                    <TextBlock Text="{x:Bind Title}" 
                                    Style="{ThemeResource SubtitleTextBlockStyle}" />
                                     <TextBlock x:Name="SubjectLine"
-                                   Text="{Binding Author}" 
+                                   Text="{x:Bind Author}" 
                                    Style="{ThemeResource BodyTextBlockStyle}" 
                                    Margin="0,12,0,0"/>
                                     <TextBlock x:Name="Body" 
-                                   Text="{Binding Content}" 
+                                   Text="{x:Bind Content}" 
                                    Style="{ThemeResource BodyTextBlockStyle}" 
                                    TextWrapping="Wrap" 
                                    Margin="0,12,0,0"/>
