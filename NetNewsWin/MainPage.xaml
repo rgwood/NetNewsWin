@@ -27,7 +27,9 @@
             <AppBarButton Icon="Forward" Label="Forward" Click="AppBarButton_Click"/>
         </CommandBar>
 
-        <controls:MasterDetailsView x:Name="FeedsMDV" Grid.Row="1" BorderBrush="LightGray" ItemsSource="{x:Bind Feeds}"
+        <controls:MasterDetailsView x:Name="FeedsMDV" Grid.Row="1" 
+                                    BorderBrush="{ThemeResource SystemBaseLowColor}" 
+                                    ItemsSource="{x:Bind Feeds}"
                                     MasterPaneWidth="250">
             <controls:MasterDetailsView.Resources>
                 <Style TargetType="ListViewItem">
@@ -42,21 +44,27 @@
                                    FontWeight="SemiBold"
                                    MaxLines="1"
                                    VerticalAlignment="Center"/>
-                        <Border HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Background="{ThemeResource SystemAccentColor}" 
+                        <Border HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                Grid.Column="1" 
+                                Background="{ThemeResource SystemAccentColor}" 
                                 CornerRadius="10" 
                                 Padding="10,0,10,2" >
-                            <TextBlock FontWeight="Medium" Text="{x:Bind UnreadCount, Mode=OneWay}" Foreground="White"/>
+                            <TextBlock FontWeight="Medium" Foreground="White"
+                                       Text="{x:Bind UnreadCount, Mode=OneWay}"/>
                         </Border>
                     </Grid>
                 </DataTemplate>
             </controls:MasterDetailsView.ItemTemplate>
             <controls:MasterDetailsView.DetailsTemplate>
                 <DataTemplate x:DataType="local:Feed">
-                    <controls:MasterDetailsView ItemsSource="{x:Bind Entries}" SelectionChanged="EntriesView_SelectionChanged"  BorderBrush="LightGray">
+                    <controls:MasterDetailsView ItemsSource="{x:Bind Entries}" 
+                                                SelectionChanged="EntriesView_SelectionChanged" 
+                                                BorderBrush="{ThemeResource SystemBaseLowColor}">
                         <controls:MasterDetailsView.ItemTemplate>
                             <DataTemplate x:DataType="local:Entry">
                                 <StackPanel Orientation="Horizontal">
-                                    <Ellipse Width="10" Height="10" Margin="0,0,10,0" Fill="{ThemeResource SystemAccentColor}"
+                                    <Ellipse Width="10" Height="10" Margin="0,0,10,0" 
+                                             Fill="{ThemeResource SystemAccentColor}"
                                              Opacity="{x:Bind Path=Unread, Mode=OneWay, Converter={StaticResource UnreadOpacityConverter}}"/>
                                     <StackPanel Margin="0,8">
                                         <TextBlock Text="{x:Bind Title}" MaxLines="1"/>
@@ -64,7 +72,7 @@
                                             Opacity=".6" MaxLines="1"/>
                                     </StackPanel>
                                 </StackPanel>
-                                
+
                             </DataTemplate>
                         </controls:MasterDetailsView.ItemTemplate>
                         <controls:MasterDetailsView.DetailsTemplate>
@@ -85,8 +93,6 @@
                             </DataTemplate>
                         </controls:MasterDetailsView.DetailsTemplate>
                     </controls:MasterDetailsView>
-
-
                 </DataTemplate>
             </controls:MasterDetailsView.DetailsTemplate>
         </controls:MasterDetailsView>
